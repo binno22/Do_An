@@ -7,6 +7,7 @@ from utils import *
 
 
 demo_img = 'demo.jpg'
+sami = 'samiii.jpg'
 
 # TẠO GIAO DIỆN
 st.title('Face Detection App')
@@ -72,7 +73,10 @@ if app_mode == 'About App':
         unsafe_allow_html=True,
     )
 
-    st.video('https://youtu.be/Ci34un4CVZU')
+#     st.video('https://youtu.be/Ci34un4CVZU')
+    
+    image = np.array(Image.open(sami))
+    st.image(image)
 
     st.markdown('''
         # About me \n
