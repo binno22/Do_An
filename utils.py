@@ -19,7 +19,7 @@ def detect_and_predict_mask(frame, faceNet, maskNet):
     # chuyển blob qua mạng và nhận được các phát hiện khuôn mặt
     faceNet.setInput(blob)
     detections = faceNet.forward()
-    print(detections.shape)
+#     print(detections.shape)
 
     # khởi tạo danh sách khuôn mặt,
     # vị trí tương ứng của chúng và danh sách dự đoán
