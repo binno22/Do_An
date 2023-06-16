@@ -145,7 +145,7 @@ elif app_mode == 'Run on Video':
         unsafe_allow_html=True,
     )
 
-    # st.subheader('Webcam App')
+    # st.subheader('Using ')
     # start = st.button('Start')
     # stop = st.button('Stop')
     # FRAME_WINDOW = st.image([])
@@ -172,7 +172,7 @@ elif app_mode == 'Run on Video':
 
     # camera.release()
     
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     frame_placeholder = st.empty()
 
@@ -181,7 +181,7 @@ elif app_mode == 'Run on Video':
     while cap.isOpened() and not stop:
         ret, frame = cap.read()
         if not ret:
-            st.warning("Chịu")
+            st.warning("Không kết nối được webcam")
             break
         
         frame = detect_image(frame)
