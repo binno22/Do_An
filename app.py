@@ -1,20 +1,9 @@
 import streamlit as st
 import cv2
-import av
 import numpy as np
 import time
 from PIL import Image
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfiguration
 from utils import *
-
-class VideoTransformer:
-    
-    def recv(self, frame):
-        frame = frame.to_ndarray(format='bgr24')
-        frame = detect_image(frame)
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-        return av.VideoFrame.from_ndarray(frame)
 
 
 demo_img = 'demo.jpg'
@@ -178,11 +167,27 @@ elif app_mode == 'Run on Video':
     #         break
 
     # camera.release()
+    
+    cap = cv2.VideoCapture(1)
 
-    st.subheader('Webcam App')
-    webrtc_streamer(key="key", video_transformer_factory=VideoTransformer)
+    frame_placeholder = st.empty()
 
-    # if ret.video_transformer:
-    #     transformed_frames = ret.video_transformer.recv()
-    #     if transformed_frames is not None:
-    #         st.image(transformed_frames.to_image(), channels="BGR")
+    stop = st.button("Stop")
+
+    while cap.isOpened() and not stop:
+        ret, frame = cap.read()
+        if not ret:
+            st.warning("Chịu")
+            break
+        
+        frame = detect_image(frame)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        frame_placeholder.image(frame)
+
+        if stop:
+            break
+    
+    cap.release()
+
+    
