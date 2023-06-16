@@ -180,9 +180,7 @@ elif app_mode == 'Run on Video':
     # camera.release()
 
     st.subheader('Webcam App')
-    webrtc_streamer(key="key", video_transformer_factory=VideoTransformer, rtc_configuration=RTCConfiguration({
-        "iceServers": [{"urls": ["stun:stun.1.google.com:19302"]}]})
-    )
+    webrtc_streamer(key="key", video_transformer_factory=VideoTransformer)
 
     # if ret.video_transformer:
     #     transformed_frames = ret.video_transformer.recv()
